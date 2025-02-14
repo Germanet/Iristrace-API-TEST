@@ -44,7 +44,7 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[NotBlank()]
+    #[NotBlank(message: 'Name is required.')]
     #[Groups(['category:read', 'category:write'])]
     private ?string $name = null;
 

@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
@@ -35,6 +39,9 @@ use Symfony\Component\Validator\Constraints\NotNull;
         'groups' => ['article:write'],
     ]
 )]
+#[ApiFilter(RangeFilter::class, properties: ['cost'])]
+#[ApiFilter(DateFilter::class, properties: ['registration_date'])]
+#[ApiFilter(SearchFilter::class, properties: ['catogory_id' => 'exact'])]
 class Article
 {
     #[ORM\Id]
@@ -44,7 +51,7 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[NotBlank]
+    #[NotBlank(message: 'Title is required.')]
     #[Length(min: 5 ,max: 120, minMessage: 'Mínimo 5 caracteres', maxMessage: 'Máximo 120 caracteres')]
     #[Groups(['article:read', 'article:write'])]
     private ?string $title = null;
@@ -54,7 +61,7 @@ class Article
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    #[NotBlank]
+    #[NotBlank(message: 'Cost is required.')]
     #[GreaterThan(value: 0, message: 'Cost must be a number greater than zero.')]
     #[Groups(['article:read', 'article:write'])]
     private ?string $cost = null;
@@ -64,8 +71,9 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
-    #[NotBlank]
+    #[NotBlank(message: 'Category is required.')]
     #[NotNull(message: 'The category must exist in the database.')]
+
     private ?Category $catogory_id = null;
 
     public function __construct()
