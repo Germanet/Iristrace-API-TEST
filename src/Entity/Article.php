@@ -41,7 +41,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 )]
 #[ApiFilter(RangeFilter::class, properties: ['cost'])]
 #[ApiFilter(DateFilter::class, properties: ['registration_date'])]
-#[ApiFilter(SearchFilter::class, properties: ['catogory_id' => 'exact'])]
+#[ApiFilter(SearchFilter::class, properties: ['category_id' => 'exact'])]
 class Article
 {
     #[ORM\Id]
@@ -73,8 +73,7 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     #[NotBlank(message: 'Category is required.')]
     #[NotNull(message: 'The category must exist in the database.')]
-
-    private ?Category $catogory_id = null;
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -136,14 +135,14 @@ class Article
     }
 
     #[Groups(['article:read', 'article:write'])]
-    public function getCatogoryId(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->catogory_id;
+        return $this->category;
     }
 
-    public function setCatogoryId(?Category $catogory_id): static
+    public function setCategory(?Category $category): static
     {
-        $this->catogory_id = $catogory_id;
+        $this->category = $category;
 
         return $this;
     }

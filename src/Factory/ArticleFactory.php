@@ -32,7 +32,7 @@ final class ArticleFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'catogory_id' => CategoryFactory::new(),
+            'category' => CategoryFactory::new(),
             'cost' => self::faker()->randomFloat(2, 0.01, 99999,99),
             'registration_date' => self::faker()->dateTime(),
             'title' => self::faker()->text(120),

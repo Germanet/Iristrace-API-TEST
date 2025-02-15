@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
         // Crear 30 artículos y asignarles una categoría aleatoria
         ArticleFactory::createMany(30, function() use ($createdCategories) {
             return [
-                'catogory_id' => $createdCategories[array_rand($createdCategories)], // Selección aleatoria
+                'category' => $createdCategories[array_rand($createdCategories)], // Selección aleatoria
             ];
         });
     }

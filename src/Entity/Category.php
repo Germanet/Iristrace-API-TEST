@@ -55,7 +55,7 @@ class Category
     /**
      * @var Collection<int, Article>
      */
-    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'catogory_id')]
+    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'category')]
     #[Groups('category:read')]
     private Collection $articles;
 
@@ -105,7 +105,7 @@ class Category
     {
         if (!$this->articles->contains($article)) {
             $this->articles->add($article);
-            $article->setCatogoryId($this);
+            $article->setCategory($this);
         }
 
         return $this;
@@ -115,8 +115,8 @@ class Category
     {
         if ($this->articles->removeElement($article)) {
             // set the owning side to null (unless already changed)
-            if ($article->getCatogoryId() === $this) {
-                $article->setCatogoryId(null);
+            if ($article->getCategory() === $this) {
+                $article->setCategory(null);
             }
         }
 
