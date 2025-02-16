@@ -23,4 +23,4 @@ symfony serve
 ```
 
 # NOTAS:
-## En la rama autenticacion_jwt he estado probando la JWT Authentication y está funcional, pero aun hay cosas que no acabo de entender en la parte del login y por eso no está en la rama Main
+En la rama autenticacion_jwt he estado probando la JWT Authentication y está funcional, pero aun hay cosas que no acabo de entender en la parte del login y por eso no está en la rama Main
